@@ -1,0 +1,12 @@
+.play-board {
+  display: flex;
+}
+.main-board {
+  width: 640px;
+  height: 360px;
+  position: relative;
+
+  border-radius: 4px;
+  box-shadow: 0 6px 8px 0 rgba(0,0,0,.03);
+  border: none;
+}

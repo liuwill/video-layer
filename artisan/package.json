@@ -1,0 +1,6 @@
+{
+  "name": "artisan",
+  "bin": {
+    "artisan": "./index"
+  }
+}
