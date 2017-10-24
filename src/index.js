@@ -4,8 +4,8 @@ import { h, render } from 'preact';
 // import './style';
 
 let root;
-function init() {
-  const rootContainer = document.querySelector('#main-board')
+function init(elementName) {
+  const rootContainer = document.querySelector(elementName)
   let App = require('./components/app').default;
   root = render(<App />, rootContainer, root);
 }
@@ -21,4 +21,4 @@ if (module.hot) {
   module.hot.accept('./components/app', () => requestAnimationFrame(init));
 }
 
-init();
+init('#main-board');
