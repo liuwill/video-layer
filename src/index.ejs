@@ -34,7 +34,7 @@
     </div>
     <div class="demo-container">
       <div class="play-board">
-        <div class="main-board without__border-radius" id="main-board">
+        <div class="main-board dark without__border-radius" id="main-board">
           <div class="play-ctrl"></div>
         </div>
 
@@ -43,6 +43,16 @@
       </div>
     </div>
   </div>
+  <script>
+    (function(){
+      window.onload = function(){
+        if(window.initPlayBoard){
+          initPlayBoard('#main-board')
+        }
+        console.log('loading')
+      }
+    })()
+  </script>
 </body>
 
 </html>

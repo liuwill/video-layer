@@ -21,4 +21,5 @@ if (module.hot) {
   module.hot.accept('./components/app', () => requestAnimationFrame(init));
 }
 
-init('#main-board');
+// init('#main-board');
+window.initPlayBoard = init
