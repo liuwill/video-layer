@@ -35,7 +35,14 @@
     <div class="demo-container">
       <div class="play-board">
         <div class="main-board dark without__border-radius" id="main-board">
-          <div class="play-ctrl"></div>
+          <video id="demoVideoPlayer" src="//static.techartisan.cn/midea/videos/quanqiufengbao_854x480.mp4" class="demo-video" controls="controls"></video>
+          <img id="demoVideoCover" src="//static.techartisan.cn/midea/covers/quanqiufengbao_cover.jpeg" class="demo-video"/>
+          <div id="demoVideoCtrl" class="play-ctrl" style="z-index:1">
+            <span class="demo-play-btn">
+              <span class="demo-icon demo-play-icon">⏏</span>
+              <span class="demo-icon demo-stop-icon hidden">=</span>
+            </span>
+          </div>
         </div>
 
         <div class="side-board">
@@ -45,11 +52,82 @@
   </div>
   <script>
     (function(){
+      function removeClass(domElement, className) {
+        var rawClassName = domElement.className
+        var clsList = rawClassName.split(" ")
+        console.log(domElement, clsList)
+        domElement.className = ""
+        for (var i in clsList){
+          if (!clsList[i] || clsList[i] == className){
+            continue
+          }
+          domElement.className += " " + clsList[i]
+        }
+      }
+      function addClass(domElement, className) {
+        var rawClassName = domElement.className
+        domElement.className = rawClassName + " " + className
+      }
+
+      function VideoCtrl() {
+        this.ctrlDom = document.querySelector("#demoVideoCtrl")
+        this.videoDom = document.querySelector("#demoVideoPlayer")
+        this.coverDom = document.querySelector("#demoVideoCover")
+
+        this.playIcon = document.querySelector(".demo-play-icon")
+        this.stopIcon = document.querySelector(".demo-stop-icon")
+        this.playing = false
+
+        this.play = function () {
+          this.videoDom.play()
+          this.playing = true
+
+          addClass(this.coverDom, "hidden")
+          addClass(this.playIcon, "hidden")
+          removeClass(this.stopIcon, "hidden")
+
+          // this.coverDom.className = this.coverDom.className + "hidden"
+          // this.playIcon.className = this.playIcon.className + "hidden"
+          // this.stopIcon.className = "demo-stop-icon"
+        }
+        this.stop = function () {
+          this.videoDom.pause()
+          this.playEnd()
+        }
+        this.playEnd = function () {
+          this.playing = false
+          removeClass(this.coverDom, "hidden")
+          removeClass(this.playIcon, "hidden")
+          addClass(this.stopIcon, "hidden")
+          // this.coverDom.className = "demo-video"
+          // this.playIcon.className = "demo-play-icon"
+          // this.stopIcon.className = this.stopIcon.className + "hidden"
+        }
+
+        this.bootstrap = function () {
+          var that = this
+          this.ctrlDom.onclick = function () {
+            if(that.playing){
+              that.stop()
+            } else {
+              that.play()
+            }
+          }
+
+          this.videoDom.addEventListener("ended", function(){
+            that.playEnd()
+          })
+        }
+      }
+
       window.onload = function(){
         if(window.initPlayBoard){
           initPlayBoard('#main-board')
         }
         console.log('loading')
+
+        var videoCtrl = new VideoCtrl()
+        videoCtrl.bootstrap()
       }
     })()
   </script>

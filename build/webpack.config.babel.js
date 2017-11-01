@@ -53,7 +53,7 @@ module.exports = {
       {
         // Transform our own .(scss|css) files with PostCSS and CSS-modules
         test: /\.(scss|css)$/,
-        include: [path.resolve(BASE_PATH, 'src/components')],
+        include: [path.resolve(BASE_PATH, 'src')],
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [
@@ -77,32 +77,32 @@ module.exports = {
           ]
         })
       },
-      {
-        test: /\.(scss|css)$/,
-        exclude: [path.resolve(BASE_PATH, 'src/components')],
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: { sourceMap: CSS_MAPS, importLoaders: 1, minimize: true }
-            },
-            {
-              loader: `postcss-loader`,
-              options: {
-                sourceMap: CSS_MAPS,
-                plugins: () => {
-                  autoprefixer({ browsers: ['last 2 versions'] });
-                }
-              }
-            },
-            {
-              loader: 'scss-loader',
-              options: { sourceMap: CSS_MAPS }
-            }
-          ]
-        })
-      },
+      // {
+      //   test: /\.(scss|css)$/,
+      //   exclude: [path.resolve(BASE_PATH, 'src/components')],
+      //   use: ExtractTextPlugin.extract({
+      //     fallback: 'style-loader',
+      //     use: [
+      //       {
+      //         loader: 'css-loader',
+      //         options: { sourceMap: CSS_MAPS, importLoaders: 1, minimize: true }
+      //       },
+      //       {
+      //         loader: `postcss-loader`,
+      //         options: {
+      //           sourceMap: CSS_MAPS,
+      //           plugins: () => {
+      //             autoprefixer({ browsers: ['last 2 versions'] });
+      //           }
+      //         }
+      //       },
+      //       {
+      //         loader: 'scss-loader',
+      //         options: { sourceMap: CSS_MAPS }
+      //       }
+      //     ]
+      //   })
+      // },
       {
         test: /\.json$/,
         use: 'json-loader'

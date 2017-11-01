@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/liuwill/video-layer#readme",
   "dependencies": {
+    "classnames": "^2.2.5",
     "preact": "^8.2.5",
     "preact-compat": "^3.17.0",
     "preact-render-to-string": "^3.7.0",
