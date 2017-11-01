@@ -12,6 +12,15 @@
   right: 20px;
   cursor: pointer
 }
+.app-dock {
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  position: absolute;
+  top: 40%;
+  left: -24px;
+  cursor: pointer
+}
 .float-icon {
   width: 100%;
   height: 100%;
@@ -45,7 +54,7 @@
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
   width: 167px;
-  height: 64%;
+  height: 72%;
   border-radius: 2px;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;

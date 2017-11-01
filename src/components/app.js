@@ -30,10 +30,18 @@ export default class App extends Component {
   }
 
   handleRoute = e => {
-    this.currentUrl = e.url;
+    this.currentUrl = e.url
   }
 
-  onOpenSidePanal = e => {
+  onFoldSidePanel = e => {
+    this.setState({
+      mode: 'fold',
+      isShow: false
+    })
+    e.stopPropagation()
+  }
+
+  onOpenSidePanel = e => {
     this.setState({
       mode: 'unfold'
     })
@@ -55,7 +63,7 @@ export default class App extends Component {
     return (
       <div id="app" className={cx(Style['app'])}>
         { mode === 'fold' &&
-          <div className={cx(Style['app-entry'])} onClick={this.onOpenSidePanal}>
+          <div className={cx(Style['app-entry'])} onClick={this.onOpenSidePanel}>
             <div className={cx(Style['float-icon'])}>🎬</div>
           </div>
         }
@@ -63,6 +71,9 @@ export default class App extends Component {
           mode === 'unfold' &&
           <div className={cx(Style['game-panel'])}>
             <div className={cx(sidePaneStyles)}>
+              <div className={cx(Style['app-dock'])} onClick={this.onFoldSidePanel}>
+                <div className={cx(Style['float-icon'])}>🔒</div>
+              </div>
             </div>
           </div>
         }

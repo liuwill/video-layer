@@ -55,7 +55,7 @@
       function removeClass(domElement, className) {
         var rawClassName = domElement.className
         var clsList = rawClassName.split(" ")
-        console.log(domElement, clsList)
+
         domElement.className = ""
         for (var i in clsList){
           if (!clsList[i] || clsList[i] == className){
@@ -85,10 +85,6 @@
           addClass(this.coverDom, "hidden")
           addClass(this.playIcon, "hidden")
           removeClass(this.stopIcon, "hidden")
-
-          // this.coverDom.className = this.coverDom.className + "hidden"
-          // this.playIcon.className = this.playIcon.className + "hidden"
-          // this.stopIcon.className = "demo-stop-icon"
         }
         this.stop = function () {
           this.videoDom.pause()
@@ -99,9 +95,6 @@
           removeClass(this.coverDom, "hidden")
           removeClass(this.playIcon, "hidden")
           addClass(this.stopIcon, "hidden")
-          // this.coverDom.className = "demo-video"
-          // this.playIcon.className = "demo-play-icon"
-          // this.stopIcon.className = this.stopIcon.className + "hidden"
         }
 
         this.bootstrap = function () {
