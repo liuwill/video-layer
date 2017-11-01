@@ -17,7 +17,7 @@ export default class App extends Component {
     this.bootstrap()
   }
 
-  state = { mode: 'fold' }
+  state = { mode: 'fold', isShow: false }
 
   bootstrap() {
     console.log('let')
@@ -37,10 +37,21 @@ export default class App extends Component {
     this.setState({
       mode: 'unfold'
     })
+
+    setTimeout(() => {
+      this.setState({
+        isShow: true
+      })
+    }, 100)
   }
 
   render() {
-    const { mode } = this.state
+    const { mode, isShow } = this.state
+    const sidePaneStyles = [Style['game-side-pane']]
+    if(isShow) {
+      sidePaneStyles.push(Style['entry'])
+    }
+
     return (
       <div id="app" className={cx(Style['app'])}>
         { mode === 'fold' &&
@@ -51,7 +62,7 @@ export default class App extends Component {
         {
           mode === 'unfold' &&
           <div className={cx(Style['game-panel'])}>
-            <div className={cx(Style['game-side-pane'], Style['entry'])}>
+            <div className={cx(sidePaneStyles)}>
             </div>
           </div>
         }
