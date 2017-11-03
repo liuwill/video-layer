@@ -93,3 +93,94 @@ body.light {
 .hidden {
   display: none;
 }
+
+.config-container {
+  max-width: 640px;
+  margin: auto;
+  margin-top: 40px;
+}
+
+.config-panel {
+  border: 1px solid #333;
+  padding: 20px;
+  margin-bottom: 40px;
+  margin-top: 40px;
+  color: #fff;
+  font-size: 14px;
+}
+.config-line {
+  text-align: center;
+  max-width: 270px;
+  margin: auto;
+  margin-bottom: 24px;
+  border-bottom: 2px solid #626262;
+  -webkit-transition: border-bottom-color 100ms ease-in, color 100ms ease-in;
+  -moz-transition: border-bottom-color 100ms ease-in, color 100ms ease-in;
+  -ms-transition: border-bottom-color 100ms ease-in, color 100ms ease-in;
+  transition: border-bottom-color 100ms ease-in, color 100ms ease-in;
+}
+.form-line {
+
+}
+.config-line.focus {
+  border-color: #fff;
+}
+.config-input {
+  border: none;
+  background-color: transparent;
+  color: #ffffff;
+  max-width: 270px;
+  display: block;
+  text-align: center;
+  font-size: 12px;
+  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+  border-radius: 0;
+  padding: 0;
+  margin: 0 auto;
+  height: 32px;
+  line-height: 22px;
+}
+
+.config-input:focus {
+  outline: none;
+  color: #fff;
+}
+
+.config-button {
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  width: 270px;
+  height: 50px;
+  display: block;
+  background: rgb(0, 0, 0);
+  border-width: 2px;
+  border-style: solid;
+  border-color: rgb(0, 0, 0);
+  border-image: initial;
+  margin: auto;
+  transition: all 0.2s ease;
+}
+
+.config-button:hover {
+  color: rgb(0, 0, 0);
+  border-width: 2px;
+  border-style: solid;
+  border-color: rgb(0, 0, 0);
+  border-image: initial;
+  background: rgb(255, 255, 255);
+}
+
+.config-button.light {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+}
+
+.config-button.light:hover {
+  color: #fff;
+  border-color: #fff;
+  background: #000;
+}

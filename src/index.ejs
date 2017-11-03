@@ -3,28 +3,28 @@
 
 <head>
   <% for (var chunk in htmlWebpackPlugin.files.css) { %>
-  <link rel="preload" href="<%= htmlWebpackPlugin.files.css[chunk] %>" as="style">
-  <% } %>
-  <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
-  <link rel="preload" href="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>" as="script">
-  <% } %>
-  <meta charset="utf-8">
-  <title>preact-boilerplate</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui">
-  <meta name="description" content="preact-boilerplate">
-  <meta name="msapplication-TileColor" content="#673ab8">
-  <meta name="msapplication-TileImage" content="./assets/icons/mstile-150x150.png">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="preact-boilerplate">
-  <meta name="application-name" content="preact-boilerplate">
-  <meta name="format-detection" content="telephone=no">
-  <meta name="theme-color" content="#673ab8">
-  <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/apple-touch-icon.png">
-  <link rel="icon" type="image/png" href="/assets/icons/favicon-32x32.png" sizes="32x32">
-  <link rel="icon" type="image/png" href="/assets/icons/favicon-16x16.png" sizes="16x16">
-  <link href="/assets/style/demo.css" rel="stylesheet" type="text/css" charset="utf-8">
-  <link rel="manifest" href="./manifest.json">
+    <link rel="preload" href="<%= htmlWebpackPlugin.files.css[chunk] %>" as="style">
+    <% } %>
+      <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+        <link rel="preload" href="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>" as="script">
+        <% } %>
+          <meta charset="utf-8">
+          <title>preact-boilerplate</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui">
+          <meta name="description" content="preact-boilerplate">
+          <meta name="msapplication-TileColor" content="#673ab8">
+          <meta name="msapplication-TileImage" content="./assets/icons/mstile-150x150.png">
+          <meta name="apple-mobile-web-app-capable" content="yes">
+          <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+          <meta name="apple-mobile-web-app-title" content="preact-boilerplate">
+          <meta name="application-name" content="preact-boilerplate">
+          <meta name="format-detection" content="telephone=no">
+          <meta name="theme-color" content="#673ab8">
+          <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/apple-touch-icon.png">
+          <link rel="icon" type="image/png" href="/assets/icons/favicon-32x32.png" sizes="32x32">
+          <link rel="icon" type="image/png" href="/assets/icons/favicon-16x16.png" sizes="16x16">
+          <link href="/assets/style/demo.css" rel="stylesheet" type="text/css" charset="utf-8">
+          <link rel="manifest" href="./manifest.json">
 </head>
 
 <body>
@@ -36,7 +36,7 @@
       <div class="play-board">
         <div class="main-board dark without__border-radius" id="main-board">
           <video id="demoVideoPlayer" src="//static.techartisan.cn/midea/videos/quanqiufengbao_854x480.mp4" class="demo-video" controls="controls"></video>
-          <img id="demoVideoCover" src="//static.techartisan.cn/midea/covers/quanqiufengbao_cover.jpeg" class="demo-video"/>
+          <img id="demoVideoCover" src="//static.techartisan.cn/midea/covers/quanqiufengbao_cover.jpeg" class="demo-video" />
           <div id="demoVideoCtrl" class="play-ctrl" style="z-index:1">
             <span class="demo-play-btn">
               <span class="demo-icon demo-play-icon">⏏</span>
@@ -48,17 +48,33 @@
         <div class="side-board">
         </div>
       </div>
+
+      <div class="config-container">
+        <div class="config-panel query-form">
+          <div class="config-line query-line">
+            <input class="config-input query-input" placeholder="输入游戏服务器" />
+          </div>
+
+          <div class="config-line query-line">
+            <input class="config-input query-input" placeholder="输入游戏ID" />
+          </div>
+
+          <div class="form-line">
+            <button class="config-button light">加入游戏</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <script>
-    (function(){
+    (function () {
       function removeClass(domElement, className) {
         var rawClassName = domElement.className
         var clsList = rawClassName.split(" ")
 
         domElement.className = ""
-        for (var i in clsList){
-          if (!clsList[i] || clsList[i] == className){
+        for (var i in clsList) {
+          if (!clsList[i] || clsList[i] == className) {
             continue
           }
           domElement.className += " " + clsList[i]
@@ -100,27 +116,46 @@
         this.bootstrap = function () {
           var that = this
           this.ctrlDom.onclick = function () {
-            if(that.playing){
+            if (that.playing) {
               that.stop()
             } else {
               that.play()
             }
           }
 
-          this.videoDom.addEventListener("ended", function(){
+          this.videoDom.addEventListener("ended", function () {
             that.playEnd()
           })
         }
       }
 
-      window.onload = function(){
-        if(window.initPlayBoard){
+      function GameApp() {
+        this.init()
+      }
+
+      GameApp.prototype.init = function () {
+        var queryInputs = document.querySelectorAll('.query-input')
+        for (var i in queryInputs) {
+          var queryInput = queryInputs[i]
+          queryInput.addEventListener('focus', function (e) {
+            addClass(e.target.parentNode, 'focus')
+          }, true)
+          queryInput.addEventListener('blur', function (e) {
+            removeClass(e.target.parentNode, 'focus')
+          }, true)
+        }
+      }
+
+      window.onload = function () {
+        if (window.initPlayBoard) {
           initPlayBoard('#main-board')
         }
         console.log('loading')
 
         var videoCtrl = new VideoCtrl()
         videoCtrl.bootstrap()
+
+        var gameApp = new GameApp()
       }
     })()
   </script>
