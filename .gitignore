@@ -2,3 +2,4 @@ node_modules
 artificial
 dist
 build/assets
+npm-debug.log

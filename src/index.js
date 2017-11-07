@@ -4,10 +4,16 @@ import { h, render } from 'preact';
 // import './style';
 
 let root;
-function init(elementName) {
+function init(elementName, options) {
   const rootContainer = document.querySelector(elementName)
   let App = require('./components/app').default;
-  root = render(<App />, rootContainer, root);
+  const appDom = <App {...options}/>
+  root = render(appDom, rootContainer, root)
+  return {
+    root: root,
+    app: appDom,
+    rootName: elementName,
+  }
 }
 
 // register ServiceWorker via OfflinePlugin, for prod only:

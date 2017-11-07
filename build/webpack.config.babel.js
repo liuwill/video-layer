@@ -11,6 +11,11 @@ const CSS_MAPS = ENV !== 'production';
 
 const BASE_PATH = path.resolve(__dirname, '../')
 
+const gameConfig = require(path.resolve(BASE_PATH, "build/config"))
+Object.assign(gameConfig, {
+  version: new Date(),
+})
+
 console.log(path.resolve(BASE_PATH, "src"))
 module.exports = {
   context: path.resolve(BASE_PATH, "src"),
@@ -33,7 +38,7 @@ module.exports = {
       components: path.resolve(BASE_PATH, "src/components"),    // used for tests
       style: path.resolve(BASE_PATH, "src/style"),
       'react': 'preact-compat',
-      'react-dom': 'preact-compat'
+      'react-dom': 'preact-compat',
     }
   },
 
@@ -134,7 +139,11 @@ module.exports = {
     new CopyWebpackPlugin([
       { from: './manifest.json', to: './' },
       { from: './favicon.ico', to: './' }
-    ])
+    ]),
+    new webpack.BannerPlugin(gameConfig.banner),
+    new webpack.DefinePlugin({
+      "process.envConfig": JSON.stringify(gameConfig)
+    })
   ]).concat(ENV === 'production' ? [
     new webpack.optimize.UglifyJsPlugin({
       output: {

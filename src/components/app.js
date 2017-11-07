@@ -14,12 +14,14 @@ export default class App extends Component {
     super(props, context)
     this.apiService = new Service(this, {})
 
+    console.log(props, process.envConfig)
     this.bootstrap()
   }
 
   state = { mode: 'fold', isShow: false }
 
   bootstrap() {
+    const {} = this.props
     console.log('let')
   }
 
