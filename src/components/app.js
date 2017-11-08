@@ -3,7 +3,10 @@ import { Router } from 'preact-router';
 import cx from 'classnames'
 import { SimpleRouter } from './router'
 import Service from '../lib/service'
+import Connector from '../lib/connector'
 import Style from 'style/main'
+
+const envConfig = process.envConfig
 
 export default class App extends Component {
   /** Gets fired when the route changes.
@@ -14,20 +17,24 @@ export default class App extends Component {
     super(props, context)
     this.apiService = new Service(this, {})
 
-    console.log(props, process.envConfig)
     this.bootstrap()
   }
 
   state = { mode: 'fold', isShow: false }
 
   bootstrap() {
-    const {} = this.props
-    console.log('let')
+    const { gameServerHost, gameServerPath } = this.props
+    this.connector = new Connector(this, {
+      gameServerHost: gameServerHost || envConfig.gameServerHost,
+      gameServerPath: gameServerPath || envConfig.gameServerPath,
+    })
+    console.log('bootstrap')
   }
 
   getChildContext() {
     return {
-      apiService: this.apiService
+      apiService: this.apiService,
+      config: process.envConfig
     }
   }
 
@@ -73,6 +80,11 @@ export default class App extends Component {
           mode === 'unfold' &&
           <div className={cx(Style['game-panel'])}>
             <div className={cx(sidePaneStyles)}>
+              <div className={cx(Style['app-side-container'])}>
+                <div className={cx(Style['app-side-content'])}>
+                  liuwei
+                </div>
+              </div>
               <div className={cx(Style['app-dock'])} onClick={this.onFoldSidePanel}>
                 <div className={cx(Style['float-icon'])}>🔒</div>
               </div>
