@@ -87,6 +87,20 @@
   </div>
   <script>
     (function () {
+      function loadDebugger() {
+        var src = '/assets/eruda/eruda.min.js'
+        if (!/debug=true/.test(window.location) && localStorage.getItem('active-eruda') != 'true') return
+        var scriptDom = document.createElement('script')
+        scriptDom.setAttribute('src', src)
+
+        document.body.appendChild(scriptDom)
+        scriptDom.onload = function () {
+          var initDom = document.createElement('script')
+          initDom.innerHTML = 'var el = document.createElement("div");document.body.appendChild(el);eruda.init({container: el});'
+          document.body.appendChild(initDom)
+        }
+      }
+
       function parseQuery(url) {
         var queryParams = {}
         var pos = url.indexOf('?')
@@ -203,6 +217,8 @@
 
         window.__GAME_APP__ = gameApp
         window.__VIDEO_CTRL__ = videoCtrl
+
+        loadDebugger()
       }
     })()
   </script>
