@@ -4,6 +4,7 @@ import cx from 'classnames'
 import { SimpleRouter } from './router'
 import Service from '../lib/service'
 import Connector from '../lib/connector'
+import Dock from './Dock'
 import Style from 'style/main'
 
 const envConfig = process.envConfig
@@ -64,10 +65,6 @@ export default class App extends Component {
 
   render() {
     const { mode, isShow } = this.state
-    const sidePaneStyles = [Style['game-side-pane']]
-    if(isShow) {
-      sidePaneStyles.push(Style['entry'])
-    }
 
     return (
       <div id="app" className={cx(Style['app'])}>
@@ -78,18 +75,7 @@ export default class App extends Component {
         }
         {
           mode === 'unfold' &&
-          <div className={cx(Style['game-panel'])}>
-            <div className={cx(sidePaneStyles)}>
-              <div className={cx(Style['app-side-container'])}>
-                <div className={cx(Style['app-side-content'])}>
-                  liuwei
-                </div>
-              </div>
-              <div className={cx(Style['app-dock'])} onClick={this.onFoldSidePanel}>
-                <div className={cx(Style['float-icon'])}>🔒</div>
-              </div>
-            </div>
-          </div>
+          <Dock isShow={isShow} onFoldSidePanel={this.onFoldSidePanel}/>
         }
         {/* <Header />
         <Router onChange={ this.handleRoute }>
